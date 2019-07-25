@@ -57,6 +57,7 @@ def get_msg_sent_to_bot(msg_id, headers):
 
     response = requests.request("GET", urltext, data=payload, headers=headers)
     response = json.loads(response.text)
+    print(response)
     #print ("Message to bot : {}".format(response["text"]))
     return response["text"]
 
