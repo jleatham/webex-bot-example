@@ -25,13 +25,13 @@ def bot(body):
     """
         Test bot for new features.
     """
-    #print("GOT {}: {}".format(type(body), repr(body)))
+    print("GOT {}: {}".format(type(body), repr(body)))
     room_id = body["data"]["roomId"]
     identity = body["data"]["personEmail"]
     text = body["data"]["id"]
-    #print("see POST from {}".format(identity))
+    print("see POST from {}".format(identity))
     if identity != BOT_EMAIL:
-        #print("{}-----{}".format(identity,BOT_EMAIL))
+        print("{}-----{}".format(identity,BOT_EMAIL))
         command = get_msg_sent_to_bot(text, BOT_HEADERS)
         command = (command.replace(BOT_NAME, '')).strip()
         command = (command.replace('@', '')).strip()
