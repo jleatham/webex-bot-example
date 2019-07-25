@@ -75,26 +75,29 @@ def process_bot_input_command(room_id,command, headers, bot_name):
 
     command_list = command.split(' ')
     event_trigger = list(set(command_list).intersection(possible_command_list))
+    print(event_trigger)
     if event_trigger:
         '''
         #remove command trigger and keep what is left
         for i in event_trigger:
             command = command.replace(i,'').strip()
         '''
-        if test_command_list in event_trigger:
+        print("made it to event trigger")
+        if any(item in test_command_list for item in event_trigger)
+            print("made it to test")
             msg_list = []
             
             msg_list.append("Test response \n\n")
             msg_list.append("This is markup text: **Bold** \n\n")
             msg = ''.join(msg_list)
             response = bot_post_to_room(room_id, msg, headers)
-        elif pause_command_list in event_trigger:
+        elif any(item in pause_command_list  for item in event_trigger)
             msg_list = []
             
             msg_list.append("**Just an example* \n\n")
             msg_list.append("blah \n\n")
             msg = ''.join(msg_list)
-            response = bot_post_to_room(room_id, msg, headers)            
+            response = bot_post_to_room(room_id, msg, headers)        
     else:
         bot_post_to_room(room_id,"Only commands I know are: **TEST** , and **pause** .  All values hard-coded at the moment and messages sent on schedule.",BOT_HEADERS)
 
