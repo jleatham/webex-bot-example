@@ -83,7 +83,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
             command = command.replace(i,'').strip()
         '''
         print("made it to event trigger")
-        if any(item in test_command_list for item in event_trigger)
+        if any(item in test_command_list for item in event_trigger):
             print("made it to test")
             msg_list = []
             
@@ -91,7 +91,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
             msg_list.append("This is markup text: **Bold** \n\n")
             msg = ''.join(msg_list)
             response = bot_post_to_room(room_id, msg, headers)
-        elif any(item in pause_command_list  for item in event_trigger)
+        elif any(item in pause_command_list  for item in event_trigger):
             msg_list = []
             
             msg_list.append("**Just an example* \n\n")
