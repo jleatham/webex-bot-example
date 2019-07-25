@@ -33,6 +33,7 @@ def bot(body):
     if identity != BOT_EMAIL:
         print("{}-----{}".format(identity,BOT_EMAIL))
         command = get_msg_sent_to_bot(text, BOT_HEADERS)
+        command - command.lower()
         command = (command.replace(BOT_NAME, '')).strip()
         command = (command.replace('@', '')).strip()
         #print("stripped command: {}".format(command))

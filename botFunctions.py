@@ -73,7 +73,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
     possible_command_list = []
     possible_command_list.append(test_command_list)
     possible_command_list.append(pause_command_list)
-    command_list = command.split(' ').lower()
+    command_list = command.split(' ')
     event_trigger = list(set(command_list).intersection(possible_command_list))
     if event_trigger:
         '''
