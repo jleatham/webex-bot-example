@@ -10,7 +10,11 @@ from requests_toolbelt.multipart.encoder import MultipartEncoder
 BOT_EMAIL = os.environ['BOT_EMAIL']
 BOT_NAME = os.environ['BOT_NAME']
 
-
+EXAMPLE_STOCK_RESULT = [
+        ["JL is in Dallas and has 3 cases of DRP", "example@example.com", "(555) 555-5555"],
+        ["CG is in San Fransisco and has 5 cases of 7UP", "example@example.com", "(555) 555-5555"],
+        ["GK is in Seattle and has 2 cases of KCUPs", "example@example.com", "(555) 555-5555"]
+]
 
 URL = "https://api.ciscospark.com/v1/messages"
 
@@ -71,7 +75,8 @@ def process_bot_input_command(room_id,command, headers, bot_name):
     """
     test_command_list = ['test']
     pause_command_list = ['stop','pause']
-    possible_command_list = test_command_list + pause_command_list
+    example_command_list = ['example']
+    possible_command_list = test_command_list + pause_command_list + example_command_list
 
     command_list = command.split(' ')
     event_trigger = list(set(command_list).intersection(possible_command_list))
@@ -94,12 +99,16 @@ def process_bot_input_command(room_id,command, headers, bot_name):
         elif any(item in pause_command_list  for item in event_trigger):
             msg_list = []
             
-            msg_list.append("**Just an example* \n\n")
+            msg_list.append("**Just an example** \n\n")
             msg_list.append("blah \n\n")
             msg = ''.join(msg_list)
-            response = bot_post_to_room(room_id, msg, headers)        
+            response = bot_post_to_room(room_id, msg, headers)    
+        elif any(item in example_command_list  for item in event_trigger):
+            stock_query = [x for x in event_trigger if (x not in example_command_list)]
+            process_stock_query(room_id,stock_query,headers)
+
     else:
-        bot_post_to_room(room_id,"Only commands I know are: **TEST** , and **pause** .  All values hard-coded at the moment and messages sent on schedule.",BOT_HEADERS)
+        bot_post_to_room(room_id,"Only commands I know are: **TEST** , and **pause** .  All values hard-coded at the moment and messages sent on schedule.",headers)
 
 
 
@@ -116,3 +125,8 @@ def bot_post_to_room(room_id, message, headers):
         #error_handling(response,response.status_code,user_input,room_id,headers)
         print("error posting to room")
 
+def process_stock_query(room_id,stock_query,headers):
+    print(f"Stock Query = {stock_query}")
+    if not stock_query:
+        msg = random.choice(EXAMPLE_STOCK_RESULT)
+    bot_post_to_room(room_id,msg,headers)
