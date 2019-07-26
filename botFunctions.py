@@ -120,10 +120,14 @@ def process_bot_input_command(room_id,command, headers, bot_name):
             bot_post_to_room(room_id,msg,headers)
     else:
         msg_list = []
+        '''
         msg_list.append("How to use bot: \n\n")
         msg_list.append("**example** {city}  --> don't include {city} if you want a random selection \n\n")
         msg_list.append("If you are in a room with multiple people, be sure to @ the bot \n\n")
         msg_list.append("@KDRP-stock-bot **example** dallas \n\n")
+        '''
+        msg_list.append(f"Just type in the product and I will find who has that inventory in your current city.  Current options: \n\n")
+        msg_list.append(f"**{str(INVENTORY_SAMPLE).strip("[").strip("]")}** \n\n")
         msg = ''.join(msg_list)        
         bot_post_to_room(room_id,msg,headers)
 
