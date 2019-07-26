@@ -124,9 +124,10 @@ def bot_post_to_room(room_id, message, headers):
         #send to the DEVs bot room
         #error_handling(response,response.status_code,user_input,room_id,headers)
         print("error posting to room")
+        print(response)
 
 def process_stock_query(room_id,stock_query,headers):
     print(f"Stock Query = {stock_query}")
     if not stock_query:
         msg = random.choice(EXAMPLE_STOCK_RESULT)
-    bot_post_to_room(room_id,msg,headers)
+    bot_post_to_room(room_id,msg[0],headers)
