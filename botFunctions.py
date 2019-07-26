@@ -10,11 +10,16 @@ from requests_toolbelt.multipart.encoder import MultipartEncoder
 BOT_EMAIL = os.environ['BOT_EMAIL']
 BOT_NAME = os.environ['BOT_NAME']
 
+CITY_SAMPLE = ["San Francisco","Dallas","Seattle","Houston","San Jose","Brooklyn","Detroit","Reno","Las Vegas","Vancouver"]
+NAME_SAMPLE = ["José Joaquín Moraga","Jed York","John Neely Bryan","Jerry Jones","Paul Allen","Luther Collins"]
+INVENTORY_SAMPLE = ["DP","7UP","AWRB","KCUP"]
+
 EXAMPLE_STOCK_RESULT = [
         ["JL is in Dallas and has 3 cases of DRP", "example@example.com", "(555) 555-5555"],
         ["CG is in San Fransisco and has 5 cases of 7UP", "example@example.com", "(555) 555-5555"],
         ["GK is in Seattle and has 2 cases of KCUPs", "example@example.com", "(555) 555-5555"]
 ]
+
 
 URL = "https://api.ciscospark.com/v1/messages"
 
@@ -76,7 +81,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
     test_command_list = ['test']
     pause_command_list = ['stop','pause']
     example_command_list = ['example']
-    possible_command_list = test_command_list + pause_command_list + example_command_list
+    possible_command_list = test_command_list + pause_command_list + example_command_list + INVENTORY_SAMPLE
 
     command_list = command.split(' ')
     event_trigger = list(set(command_list).intersection(possible_command_list))
@@ -106,7 +111,13 @@ def process_bot_input_command(room_id,command, headers, bot_name):
         elif any(item in example_command_list  for item in event_trigger):
             stock_query = [x for x in command_list if (x not in example_command_list)]
             process_stock_query(room_id,stock_query,headers)
-
+        elif any(item in INVENTORY_SAMPLE  for item in event_trigger):
+            msg_list = []
+            msg_list.append(f"Our DB has you located in the city of **{random.choice(CITY_SAMPLE)}** \n\n")
+            msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0]} \n\n")
+            msg_list.append(f"Contact info: example@example.com    (555)555-5555 \n\n")
+            msg = ''.join(msg_list) 
+            bot_post_to_room(room_id,msg,headers)
     else:
         msg_list = []
         msg_list.append("How to use bot: \n\n")
