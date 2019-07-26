@@ -104,7 +104,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
             msg = ''.join(msg_list)
             response = bot_post_to_room(room_id, msg, headers)    
         elif any(item in example_command_list  for item in event_trigger):
-            stock_query = [x for x in event_trigger if (x not in example_command_list)]
+            stock_query = [x for x in command_list if (x not in example_command_list)]
             process_stock_query(room_id,stock_query,headers)
 
     else:
@@ -132,9 +132,9 @@ def process_stock_query(room_id,stock_query,headers):
         msg = random.choice(EXAMPLE_STOCK_RESULT)
     elif "dallas" in stock_query:
         msg = EXAMPLE_STOCK_RESULT[0]         
-    elif "san fransisco" in stock_query:
+    elif "san" in stock_query:
         msg = EXAMPLE_STOCK_RESULT[1]
     elif "seattle" in stock_query:
         msg = EXAMPLE_STOCK_RESULT[2]
-           
+
     bot_post_to_room(room_id,msg[0],headers)
