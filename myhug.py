@@ -33,9 +33,11 @@ def bot(body):
     if identity != BOT_EMAIL:
         print("{}-----{}".format(identity,BOT_EMAIL))
         command = get_msg_sent_to_bot(text, BOT_HEADERS)
-        command = command.lower()
+        print(f"command = {command}")
         command = (command.replace(BOT_NAME, '')).strip()
         command = (command.replace('@', '')).strip()
+        command = command.lower()
+        print(f"command = {command}")
         #print("stripped command: {}".format(command))
         process_bot_input_command(room_id,command, BOT_HEADERS, BOT_NAME)
         #send_log_to_ss(BOT_NAME,str(datetime.now()),identity,command,room_id)
