@@ -12,7 +12,7 @@ BOT_NAME = os.environ['BOT_NAME']
 
 CITY_SAMPLE = ["San Francisco","Dallas","Seattle","Houston","San Jose","Brooklyn","Detroit","Reno","Las Vegas","Vancouver"]
 NAME_SAMPLE = ["José Joaquín Moraga","Jed York","John Neely Bryan","Jerry Jones","Paul Allen","Luther Collins"]
-INVENTORY_SAMPLE = ["dp","7up","awrb","kcup"]
+INVENTORY_SAMPLE = ["dp","canada-dry","awrb","gingerale","crush"]
 
 EXAMPLE_STOCK_RESULT = [
         ["JL is in Dallas and has 3 cases of DRP", "example@example.com", "(555) 555-5555"],
