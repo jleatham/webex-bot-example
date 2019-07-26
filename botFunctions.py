@@ -127,7 +127,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
         msg_list.append("@KDRP-stock-bot **example** dallas \n\n")
         '''
         msg_list.append(f"Just type in the product and I will find who has that inventory in your current city.  Current options: \n\n")
-        msg_list.append(f"**{str(INVENTORY_SAMPLE).strip("[").strip("]")}** \n\n")
+        msg_list.append(f"**{str(INVENTORY_SAMPLE).strip('[').strip(']')}** \n\n")
         msg = ''.join(msg_list)        
         bot_post_to_room(room_id,msg,headers)
 
