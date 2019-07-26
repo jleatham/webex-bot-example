@@ -113,8 +113,9 @@ def process_bot_input_command(room_id,command, headers, bot_name):
             process_stock_query(room_id,stock_query,headers)
         elif any(item in INVENTORY_SAMPLE  for item in event_trigger):
             msg_list = []
-            msg_list.append(f"Our DB has you located in the city of **{random.choice(CITY_SAMPLE)}** \n\n")
-            msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} \n\n")
+            msg_list.append(f"We have you located in the city of **{random.choice(CITY_SAMPLE)}** \n\n")
+            msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
+            msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
             msg_list.append(f"Contact info: example@example.com    (555)555-5555 \n\n")
             msg = ''.join(msg_list) 
             bot_post_to_room(room_id,msg,headers)
