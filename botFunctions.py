@@ -75,23 +75,21 @@ def get_msg_sent_to_bot(msg_id, headers):
 
 def process_bot_input_command(room_id,command, headers, bot_name):
     """ 
-        Give generic response for now if spoken to.
-        Add a test command to run what it would look like
+        Provides a few different command options based in different lists. (commands should be lower case)
+        Combines all lists together and checks if any keyword commands are detected...basically a manually created case/switch statement
+        For each possible command, do something
+        Is there an easier way to do this?
     """
     test_command_list = ['test']
     pause_command_list = ['stop','pause']
     example_command_list = ['example']
-    possible_command_list = test_command_list + pause_command_list + example_command_list + INVENTORY_SAMPLE
+    inventory_command_list = INVENTORY_SAMPLE
+    possible_command_list = test_command_list + pause_command_list + example_command_list + inventory_command_list
 
     command_list = command.split(' ')
     event_trigger = list(set(command_list).intersection(possible_command_list))
     print(event_trigger)
     if event_trigger:
-        '''
-        #remove command trigger and keep what is left
-        for i in event_trigger:
-            command = command.replace(i,'').strip()
-        '''
         print("made it to event trigger")
         if any(item in test_command_list for item in event_trigger):
             print("made it to test")
@@ -111,7 +109,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
         elif any(item in example_command_list  for item in event_trigger):
             stock_query = [x for x in command_list if (x not in example_command_list)]
             process_stock_query(room_id,stock_query,headers)
-        elif any(item in INVENTORY_SAMPLE  for item in event_trigger):
+        elif any(item in inventory_command_list  for item in event_trigger):
             msg_list = []
             msg_list.append(f"We have you located in the city of **{random.choice(CITY_SAMPLE)}** \n\n")
             msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
@@ -128,7 +126,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
         msg_list.append("@KDRP-stock-bot **example** dallas \n\n")
         '''
         msg_list.append(f"Just type in the product and I will find who has that inventory in your current city.  Current options: \n\n")
-        msg_list.append(f"**{str(INVENTORY_SAMPLE).strip('[').strip(']')}** \n\n")
+        msg_list.append(f"**{str(inventory_command_list).strip('[').strip(']')}** \n\n")
         msg = ''.join(msg_list)        
         bot_post_to_room(room_id,msg,headers)
 
