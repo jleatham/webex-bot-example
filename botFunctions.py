@@ -20,6 +20,7 @@ EXAMPLE_STOCK_RESULT = [
         ["GK is in Seattle and has 2 cases of KCUPs", "example@example.com", "(555) 555-5555"]
 ]
 
+NAME_SAMPLE_2 = [["José Joaquín Moraga","moraga@example.com","(111) 111-1111"],["Jed York","york@example.com","(222) 222-2222"],["John Neely Bryan","bryan@example.com","(333) 333-3333"],["Jerry Jones","jones@example.com","(444) 444-4444"],["Paul Allen","allen@example.com","(555) 555-5555"],["Luther Collins","collins@example.com","(666) 666-6666"]]
 
 URL = "https://api.ciscospark.com/v1/messages"
 
@@ -112,17 +113,19 @@ def process_bot_input_command(room_id,command, headers, bot_name):
         elif any(item in inventory_command_list  for item in event_trigger):
             msg_list = []
             msg_list.append(f"We have you located in the city of **{random.choice(CITY_SAMPLE)}** \n\n")
-            first_name = random.choice(NAME_SAMPLE)
-            print(NAME_SAMPLE)
+            first_name = random.choice(NAME_SAMPLE_2)
+
+            print(NAME_SAMPLE_2)
             print(first_name)
-            temp_name_sample = NAME_SAMPLE.copy()
+            temp_name_sample = NAME_SAMPLE_2.copy()
             temp_name_sample.remove(first_name)
             print(temp_name_sample)
             second_name = random.choice(temp_name_sample)
             print(second_name)
-            msg_list.append(f"**{first_name}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
-            msg_list.append(f"**{second_name}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
-            msg_list.append(f"Contact info: example@example.com    (555)555-5555 \n\n")
+            msg_list.append(f"**{first_name[0]}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
+            msg_list.append(f"**{second_name[0]}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
+            msg_list.append(f"Contact info: {first_name[1]}    {first_name[2]}  \n\n")
+            msg_list.append(f"Contact info: {second_name[1]}    {second_name[2]}  \n\n")
             msg = ''.join(msg_list) 
             bot_post_to_room(room_id,msg,headers)
     else:
