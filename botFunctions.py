@@ -115,9 +115,10 @@ def process_bot_input_command(room_id,command, headers, bot_name):
             first_name = random.choice(NAME_SAMPLE)
             print(NAME_SAMPLE)
             print(first_name)
-            NAME_SAMPLE.remove(first_name)
-            print(NAME_SAMPLE)
-            second_name = random.choice(NAME_SAMPLE)
+            temp_name_sample = NAME_SAMPLE
+            temp_name_sample.remove(first_name)
+            print(temp_name_sample)
+            second_name = random.choice(temp_name_sample)
             print(second_name)
             msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
             msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
