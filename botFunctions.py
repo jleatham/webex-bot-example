@@ -115,7 +115,7 @@ def process_bot_input_command(room_id,command, headers, bot_name):
             first_name = random.choice(NAME_SAMPLE)
             print(NAME_SAMPLE)
             print(first_name)
-            temp_name_sample = NAME_SAMPLE
+            temp_name_sample = NAME_SAMPLE.copy()
             temp_name_sample.remove(first_name)
             print(temp_name_sample)
             second_name = random.choice(temp_name_sample)
