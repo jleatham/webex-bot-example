@@ -113,8 +113,11 @@ def process_bot_input_command(room_id,command, headers, bot_name):
             msg_list = []
             msg_list.append(f"We have you located in the city of **{random.choice(CITY_SAMPLE)}** \n\n")
             first_name = random.choice(NAME_SAMPLE)
+            print(NAME_SAMPLE)
             print(first_name)
-            second_name = random.choice(NAME_SAMPLE.remove(first_name))
+            NAME_SAMPLE.remove(first_name)
+            print(NAME_SAMPLE)
+            second_name = random.choice(NAME_SAMPLE)
             print(second_name)
             msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
             msg_list.append(f"**{random.choice(NAME_SAMPLE)}** currently has **{random.randint(1,10)}** cases of {event_trigger[0].upper()} and is {random.randint(1,10)} miles away\n\n")
