@@ -25,7 +25,7 @@ def bot(body):
     """
         Test bot for new features.
     """
-    print("GOT {}: {}".format(type(body), repr(body)))
+    #print("GOT {}: {}".format(type(body), repr(body)))
     room_id = body["data"]["roomId"]
     identity = body["data"]["personEmail"]
     text = body["data"]["id"]
